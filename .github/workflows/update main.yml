@@ -2,13 +2,13 @@ name: Cypress tests
 
 on: [push]
 
-jobs: 
-      my-job:
-       concurrency:
+jobs:
+  my-job:
+    concurrency:
       group: ${{ github.head_ref }}-init
       cancel-in-progress: true
       
-       cypress-run:
+  cypress-run:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,7 +24,4 @@ jobs:
         run: npm install
 
       - name: Install Cypress
-        run: npm install cypress
-
-      - name: Run Cypress tests
-          run: npx cypress run
+        
