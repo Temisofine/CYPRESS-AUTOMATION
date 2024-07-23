@@ -1,0 +1,30 @@
+name: Cypress tests
+
+on: [push]
+
+jobs:
+my-job:
+    concurrency:
+      group: ${{ github.head_ref }}-init
+      cancel-in-progress: true
+      
+     cypress-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14.x'  # Adjust the Node.js version as needed
+
+      - name: Install project dependencies
+        run: npm install
+
+      - name: Install Cypress
+        run: npm install cypress
+
+      - name: Run Cypress tests
+        run: npx cypress run 
